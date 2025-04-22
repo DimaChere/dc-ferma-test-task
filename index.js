@@ -6,12 +6,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.getElementById("category-select");
     const categoryCheckboxes = document.getElementById("category-checkboxes");
     const sortPriceBtn = document.getElementById("sort-price");
+    const filtersToggle = document.getElementById("filters-toggle");
+    const filtersContainer = document.getElementById("filters-container");
 
     let productsData = [];
     let filteredProducts = [];
     let sortAscending = true;
     let selectedCategories = [];
     let favorites = JSON.parse(localStorage.getItem("favorites")) || {};
+
+    if (filtersToggle && filtersContainer) {
+        filtersToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            filtersContainer.classList.toggle("active");
+        });
+
+        filtersContainer.addEventListener("click", function (e) {
+            if (e.target === filtersContainer) {
+                filtersContainer.classList.remove("active");
+            }
+        });
+
+        filtersContainer
+            .querySelector(".filters")
+            .addEventListener("click", function (e) {
+                e.stopPropagation();
+            });
+    }
 
     function formatPrice(price) {
         return new Intl.NumberFormat("ru-RU").format(price);
