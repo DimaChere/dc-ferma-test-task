@@ -35,45 +35,91 @@
                 />
             </symbol>
         </svg>
-        <header class="filters">
-            <div class="filter">
-                <label for="filter-price" class="filter-label"
-                    >Фильтрация по цене</label
+        <header class="filters-header">
+            <button id="filters-toggle" class="button__primary">
+                <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                <input
-                    type="number"
-                    id="min-price"
-                    class="input__primary--number"
-                    placeholder="Мин цена"
-                />
-                <input
-                    type="number"
-                    id="max-price"
-                    class="input__primary--number"
-                    placeholder="Макс цена"
-                />
-                <button id="filter-price" class="button__primary">
-                    Фильтровать
-                </button>
-            </div>
-            <div class="filter">
-                <label for="category-select" class="filter-label"
-                    >Фильтрация по категориям</label
-                >
-                <select id="category-select">
-                    <option value="">Все категории</option>
-                </select>
-                <div id="category-checkboxes" class="category-checkboxes"></div>
-            </div>
-            <div class="filter">
-                <label for="category-select" class="filter-label">
-                    Сортировать по цене</label
-                >
-                <button id="sort-price" class="button__primary">
-                    по возрастанию
-                </button>
-            </div>
+                    <path
+                        d="M4 6H20M4 12H20M4 18H20"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+                Фильтры
+            </button>
         </header>
+        <div id="filters-container" class="filters-container">
+            <div class="filters">
+                <div class="filter">
+                    <label for="filter-price" class="filter-label"
+                        >Фильтрация по цене</label
+                    >
+                    <input
+                        type="number"
+                        id="min-price"
+                        class="input__primary--number"
+                        placeholder="Мин цена"
+                    />
+                    <input
+                        type="number"
+                        id="max-price"
+                        class="input__primary--number"
+                        placeholder="Макс цена"
+                    />
+                    <button id="filter-price" class="button__primary">
+                        Фильтровать
+                    </button>
+                </div>
+                <div class="filter">
+                    <label for="category-select" class="filter-label"
+                        >Фильтрация по категориям</label
+                    >
+                    <select id="category-select">
+                        <option value="">Все категории</option>
+                    </select>
+                    <div
+                        id="category-checkboxes"
+                        class="category-checkboxes"
+                    ></div>
+                </div>
+                <div class="filter">
+                    <label for="category-select" class="filter-label">
+                        Сортировать по цене</label
+                    >
+                    <button id="sort-price" class="button__primary">
+                        по возрастанию
+                    </button>
+                </div>
+
+                <button
+                    id="clear-filters"
+                    class="button__primary button__secondary"
+                >
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M6 6L18 18M6 18L18 6"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                    Очистить фильтры
+                </button>
+            </div>
+        </div>
+
         <main class="cards-container"></main>
         <script src="index.js"></script>
     </body>
