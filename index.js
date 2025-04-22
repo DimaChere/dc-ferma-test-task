@@ -11,14 +11,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let filteredProducts = [];
     let sortAscending = true;
     let selectedCategories = [];
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || {};
 
     function formatPrice(price) {
         return new Intl.NumberFormat("ru-RU").format(price);
     }
 
     function createProductCard(product) {
+        const isFavorite = favorites[product.id] || false;
         return `
-        <div class="product-card">
+        <div class="product-card" data-id="${product.id}">
             <img src="${
                 product.image
             }" alt="${product.title}" class="product-card__image">
@@ -30,8 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="product-info__price-currency">₽</span>
                 </p>
             </div>
-            <button class="product-card__favorite-button">
-                <svg width="24" height="24"><use href="#heart-off"></use></svg>
+            <button class="product-card__favorite-button ${
+                isFavorite ? "active" : ""
+            }">
+                <svg width="24" height="24"><use href="${
+                    isFavorite ? "#heart-on" : "#heart-off"
+                }"></use></svg>
             </button>
         </div>`;
     }
@@ -52,13 +58,23 @@ document.addEventListener("DOMContentLoaded", function () {
             .querySelectorAll(".product-card__favorite-button")
             .forEach((button) => {
                 button.addEventListener("click", function () {
-                    this.classList.toggle("active");
+                    const productId = this.closest(".product-card").dataset.id;
+                    const isActive = this.classList.toggle("active");
                     const useElement = this.querySelector("use");
+
                     useElement.setAttribute(
                         "href",
-                        this.classList.contains("active")
-                            ? "#heart-on"
-                            : "#heart-off"
+                        isActive ? "#heart-on" : "#heart-off"
+                    );
+
+                    if (isActive) {
+                        favorites[productId] = true;
+                    } else {
+                        delete favorites[productId];
+                    }
+                    localStorage.setItem(
+                        "favorites",
+                        JSON.stringify(favorites)
                     );
                 });
             });
@@ -160,10 +176,14 @@ document.addEventListener("DOMContentLoaded", function () {
     )
         .then((response) => (response.ok ? response.json() : Promise.reject()))
         .then((products) => {
-            productsData = products;
-            filteredProducts = [...products];
+            productsData = products.map((product, index) => ({
+                ...product,
+                id: product.id || `product-${index}`,
+            }));
+
+            filteredProducts = [...productsData];
             renderProducts(filteredProducts);
-            populateCategories(products);
+            populateCategories(productsData);
         })
         .catch(() => {
             cardsContainer.innerHTML =
