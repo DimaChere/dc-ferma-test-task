@@ -35,6 +35,45 @@
                 />
             </symbol>
         </svg>
+        <header class="filters">
+            <div class="filter">
+                <label for="filter-price" class="filter-label"
+                    >Фильтрация по цене</label
+                >
+                <input
+                    type="number"
+                    id="min-price"
+                    class="input__primary--number"
+                    placeholder="Мин цена"
+                />
+                <input
+                    type="number"
+                    id="max-price"
+                    class="input__primary--number"
+                    placeholder="Макс цена"
+                />
+                <button id="filter-price" class="button__primary">
+                    Фильтровать
+                </button>
+            </div>
+            <div class="filter">
+                <label for="category-select" class="filter-label"
+                    >Фильтрация по категориям</label
+                >
+                <select id="category-select">
+                    <option value="">Все категории</option>
+                </select>
+                <div id="category-checkboxes" class="category-checkboxes"></div>
+            </div>
+            <div class="filter">
+                <label for="category-select" class="filter-label">
+                    Сортировать по цене</label
+                >
+                <button id="sort-price" class="button__primary">
+                    по возрастанию
+                </button>
+            </div>
+        </header>
         <main class="cards-container"></main>
         <script src="index.js"></script>
     </body>
