@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sortPriceBtn = document.getElementById("sort-price");
     const filtersToggle = document.getElementById("filters-toggle");
     const filtersContainer = document.getElementById("filters-container");
+    const clearFiltersBtn = document.getElementById("clear-filters");
 
     let productsData = [];
     let filteredProducts = [];
@@ -32,6 +33,25 @@ document.addEventListener("DOMContentLoaded", function () {
             .addEventListener("click", function (e) {
                 e.stopPropagation();
             });
+    }
+
+    function clearAllFilters() {
+        minPriceInput.value = "";
+        maxPriceInput.value = "";
+
+        selectedCategories = [];
+        categorySelect.value = "";
+        updateCheckboxes();
+
+        sortAscending = true;
+        sortPriceBtn.textContent = "по возрастанию";
+
+        filteredProducts = [...productsData];
+        renderProducts(filteredProducts);
+    }
+
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener("click", clearAllFilters);
     }
 
     function formatPrice(price) {

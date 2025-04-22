@@ -149,6 +149,24 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+.button__secondary {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.button__secondary:hover {
+    background-color: var(--primary-blue-bg);
+    transform: none;
+    box-shadow: none;
+}
+
+.button__secondary svg {
+    margin-right: 6px;
+}
+
 #category-select {
     padding: 8px 12px;
     border: 1px solid var(--border-color);
